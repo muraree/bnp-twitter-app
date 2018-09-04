@@ -20,10 +20,10 @@ const server = app.listen(port);
 const io = require("socket.io").listen(server);
 
 const client = new Twitter({
-  consumer_key: 'CXVNsTDohsJaIxl0cjpuLKXYr',
-  consumer_secret: 'Y49dNi2NPN9vJaPS95QnRLslOqisEuC7v934lHOfN05cVjbtDB',
-  access_token_key: '2834545563-QYQqm8hnLPiU3eFyAD8SGtKhfIYW7gMp8fGh8Xd',
-  access_token_secret: 'SUquQt3XC2ve3IIa8JbwMa4bsRCpZSJuCVKYAXLUTDBBT'
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token_key: process.env.ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 });
 
 io.on("connection", socket => {
