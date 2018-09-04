@@ -34,12 +34,11 @@ io.on("connection", socket => {
 
 const subscribeAndEmit = async socket => {
   try {
-    const {lat, lon, prevFirstTweet } = socket.request._query;
-    consooe.log("prevFirstTweet", prevFirstTweet);
-    const geocode = `${lat},${lon},100mi`;
+    const {lat, long, prevFirstTweet } = socket.request._query;
+    const geocode = `${lat},${long},100mi`;
     const params = {q: 'nowplaying', count: 5, geocode: geocode };
     const tweets = await client.get('search/tweets', params);
-    if (prevFirstTweet !== tweets.statuses[0].id_str) {
+    if (tweets[0] && prevFirstTweet !== tweets.statuses[0].id_str) {
       socket.emit("getRecentTweets", { tweets: tweets });
     }
   } catch (error) {
@@ -49,8 +48,8 @@ const subscribeAndEmit = async socket => {
 
 app.get('/api/tweets', async (req, res) => {
   try {
-    const geocode = `${req.query.lat},${req.query.lon},100mi`;
-    const max_id = req.query.maxId;
+    const { lat, long, maxId: max_id } = req.query;
+    const geocode = `${lat},${long},100mi`;
     var params = {q: 'nowplaying', count: 5, geocode: geocode, max_id: max_id };
     const tweets = await client.get('search/tweets', params)
     if (max_id) tweets.statuses.splice(0, 1);
