@@ -27,6 +27,9 @@ To get the project running on your PC you have to first get the clone url: https
 
 Then you have to do "npm install" inside the project directory.
 
+Export your twitter authorization keys in process env such as:
+CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET
+
 Then "yarn dev" to start the project.
 
 Note- Any feedbacks for improvement are appreciated.
